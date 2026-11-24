@@ -1,0 +1,7 @@
+store_id,zone_name,target_sla_mins
+DS_01,Koramangala,15
+DS_02,Indiranagar,15
+DS_03,HSR Layout,15
+DS_04,Whitefield,20
+DS_05,Jayanagar,15
+DS_06,Electronic City,20

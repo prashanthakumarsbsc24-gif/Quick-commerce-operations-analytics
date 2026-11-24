@@ -33,9 +33,11 @@ customers = pd.DataFrame({
 # 4. Orders (10,000 orders)
 n_orders = 10000
 order_dates = pd.to_datetime('2026-01-01') + pd.to_timedelta(np.random.randint(0, 90, n_orders), unit='D')
-order_hours = np.random.choice(range(7, 24), n_orders, p=[
-    0.03, 0.05, 0.07, 0.06, 0.05, 0.05, 0.06, 0.05, 0.04, 0.05, 0.07, 0.09, 0.10, 0.09, 0.06, 0.04, 0.03
-])
+
+hour_probs = np.array([0.03, 0.05, 0.07, 0.06, 0.05, 0.05, 0.06, 0.05, 0.04, 0.05, 0.07, 0.09, 0.10, 0.09, 0.06, 0.04, 0.03])
+hour_probs = hour_probs / hour_probs.sum()
+order_hours = np.random.choice(range(7, 24), n_orders, p=hour_probs)
+
 timestamps = [d + timedelta(hours=int(h), minutes=int(np.random.randint(0, 60))) for d, h in zip(order_dates, order_hours)]
 
 store_choices = np.random.choice(stores['store_id'], n_orders)
